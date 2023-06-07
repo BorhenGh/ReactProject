@@ -1,0 +1,156 @@
+/* App.css */
+/* App.css */
+
+/* Styles pour les boutons */
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button-primary {
+  background-color: #007bff;
+}
+
+.button-primary:hover {
+  background-color: #0056b3;
+}
+
+.button-secondary {
+  background-color: #6c757d;
+}
+
+.button-secondary:hover {
+  background-color: #545b62;
+}
+
+.button-cta {
+  background-color: #28a745;
+}
+
+.button-cta:hover {
+  background-color: #1e7f38;
+}
+
+.button-danger {
+  background-color: #dc3545;
+}
+
+.button-danger:hover {
+  background-color: #a71d2a;
+}
+/* App.css */
+
+/* Styles pour la popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+}
+
+.App {
+  text-align: center;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.App h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.ticket {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ticket h2 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.ticket p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.booksq-container {
+  margin-bottom: 20px;
+}
+
+.booksq-container input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.booksq-container button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.result-container {
+  margin-top: 20px;
+}
+
+.result-title {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.result-number,
+.result-text,
+.result-edition,
+.result-surah-number,
+.result-surah-name {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
