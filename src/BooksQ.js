@@ -2,6 +2,7 @@ import React, { useReducer, useState } from 'react';
 import axios from 'axios';
 import './BooksQ.css';
 
+// État initial
 const initialState = {
   reference: '',
   keyword: '',
@@ -10,6 +11,7 @@ const initialState = {
   error: null,
 };
 
+// Actions pour le reducer
 const actions = {
   SET_REFERENCE: 'SET_REFERENCE',
   SET_KEYWORD: 'SET_KEYWORD',
@@ -18,6 +20,7 @@ const actions = {
   FETCH_ERROR: 'FETCH_ERROR',
 };
 
+// Reducer pour gérer les transitions d'état
 const reducer = (state, action) => {
   switch (action.type) {
     case actions.SET_REFERENCE:
@@ -56,14 +59,6 @@ const BooksQ = () => {
     }
   };
 
-  // Ajout d'une classe pour déclencher l'animation
-  const fadeInResults = () => {
-    const resultContainer = document.querySelector('.result-container');
-    if (resultContainer) {
-      resultContainer.classList.add('fade-in');
-    }
-  };
-
   return (
     <div className="booksq-container">
       <div>
@@ -73,7 +68,7 @@ const BooksQ = () => {
           onChange={(e) => dispatch({ type: actions.SET_REFERENCE, payload: e.target.value })}
           placeholder="Enter verse reference"
         />
-        <button className="button button-primary" onClick={() => { handleSearch(); fadeInResults(); }}>
+        <button className="button button-primary" onClick={handleSearch}>
           Search reverse
         </button>
       </div>
@@ -87,13 +82,11 @@ const BooksQ = () => {
           onChange={(e) => dispatch({ type: actions.SET_KEYWORD, payload: e.target.value })}
           placeholder="Enter keyword"
         />
-        <button onClick={() => { handleSearch(); fadeInResults(); }}>
-          Search Keyword
-        </button>
+        <button onClick={handleSearch}>Search Keyword</button>
       </div>
-      <div className={`result-container ${state.data ? 'fade-in' : ''}`}>
+      <div>
         {state.data && (
-          <>
+          <div className="result-container">
             <p className="result-title">Search Results</p>
             {state.data.map((item, index) => (
               <div key={index}>
@@ -105,7 +98,7 @@ const BooksQ = () => {
                 <hr />
               </div>
             ))}
-          </>
+          </div>
         )}
       </div>
     </div>
