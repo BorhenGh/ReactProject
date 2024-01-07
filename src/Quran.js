@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+
 const Quran = () => {
-    const message = 'Bonjour, monde!';
+  
     
     return (
       <div>

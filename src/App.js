@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Quran from './Quran';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import Surah from './Surah';
 
 import Home from './Home';
