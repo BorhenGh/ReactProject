@@ -1,8 +1,11 @@
-
-
 import React, { useReducer, useState, useEffect } from 'react';
 import axios from 'axios';
 import './BooksQ.css';
+
+type BookItem = {
+  [key: string]: number | string;
+  // ... autres propriétés
+};
 
 const initialState = {
   reference: '',
@@ -11,7 +14,7 @@ const initialState = {
   loading: false,
   error: null,
   sortBy: 'number',
-  lastSearches: [],
+  lastSearches: [] as { keyword: string; reference: string }[],
   currentPage: 1,
   itemsPerPage: 5,
 };
@@ -26,7 +29,7 @@ const actions = {
   SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
 };
 
-const reducer = (state, action) => {
+const reducer = (state: typeof initialState, action: { type: string; payload?: any }) => {
   switch (action.type) {
     case actions.SET_REFERENCE:
       return { ...state, reference: action.payload };
@@ -61,11 +64,13 @@ const reducer = (state, action) => {
 
 const BooksQ = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [sortedData, setSortedData] = useState([]);
+  const [sortedData, setSortedData] = useState<BookItem[]>([]);
 
   useEffect(() => {
     if (state.data) {
-      const sorted = [...state.data].sort((a, b) => a[state.sortBy] - b[state.sortBy]);
+      const sorted = [...state.data].sort(
+        (a, b) => (Number(a[state.sortBy]) || 0) - (Number(b[state.sortBy]) || 0)
+      );
       setSortedData(sorted);
     }
   }, [state.data, state.sortBy]);
@@ -82,18 +87,21 @@ const BooksQ = () => {
         response = await axios.get(`http://api.alquran.cloud/v1/search/${state.keyword}/all/en`);
       }
 
-      dispatch({ type: actions.FETCH_SUCCESS, payload: response.data.data.matches || [response.data.data] });
+      dispatch({
+        type: actions.FETCH_SUCCESS,
+        payload: response?.data?.data?.matches || [response?.data?.data],
+      });
     } catch (error) {
       dispatch({ type: actions.FETCH_ERROR, payload: 'Une erreur s\'est produite' });
       console.error(error);
     }
   };
 
-  const handleSortChange = (sortBy) => {
+  const handleSortChange = (sortBy: string) => {
     dispatch({ type: actions.SET_SORT_BY, payload: sortBy });
   };
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     dispatch({ type: actions.SET_CURRENT_PAGE, payload: page });
   };
 
@@ -149,7 +157,7 @@ const BooksQ = () => {
         <label>Sort by:</label>
         <select value={state.sortBy} onChange={(e) => handleSortChange(e.target.value)}>
           <option value="number">Number</option>
-          {/* Add other sorting options as needed */}
+          {/* Ajoutez d'autres options de tri au besoin */}
         </select>
       </div>
       <div>
@@ -171,9 +179,9 @@ const BooksQ = () => {
                       <p className="result-text">Text: {item?.text}</p>
                     </>
                   )}
-                  <p className="result-edition">Edition: {item?.edition?.name}</p>
-                  <p className="result-surah-number">Surah Number: {item?.surah?.number}</p>
-                  <p className="result-surah-name">Surah Name: {item?.surah?.name}</p>
+                  <p className="result-edition">Edition: {item?.edition?.toString()}</p>
+                  <p className="result-surah-number">Surah Number: {item?.surah?.toString()}</p>
+                  <p className="result-surah-name">Surah Name: {item?.surah?.toString()}</p>
                   <hr />
                 </div>
               ))}
@@ -188,7 +196,6 @@ const BooksQ = () => {
           </div>
         )}
       </div>
-      
     </div>
   );
 };

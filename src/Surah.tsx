@@ -2,8 +2,23 @@ import React, { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import './surah.css';
 
+// Types
+type Surah = {
+  number: number;
+  englishName: string;
+  name: string;
+  numberOfAyahs: number;
+  revelationType: string;
+};
+
+type State = {
+  surahs: Surah[];
+  loading: boolean;
+  error: string | null;
+};
+
 // État initial
-const initialState = {
+const initialState: State = {
   surahs: [],
   loading: false,
   error: null,
@@ -17,7 +32,7 @@ const actions = {
 };
 
 // Reducer pour gérer les transitions d'état
-const reducer = (state, action) => {
+const reducer = (state: State, action: { type: string; payload?: any }): State => {
   switch (action.type) {
     case actions.FETCH_START:
       return { ...state, loading: true, error: null };
@@ -39,7 +54,7 @@ const Surah = () => {
 
       try {
         const response = await axios.get('http://api.alquran.cloud/v1/meta');
-        const surahs = Object.values(response.data.data.surahs.references);
+        const surahs: Surah[] = Object.values(response.data.data.surahs.references);
         dispatch({ type: actions.FETCH_SUCCESS, payload: surahs });
       } catch (error) {
         dispatch({ type: actions.FETCH_ERROR, payload: 'Une erreur s\'est produite' });
