@@ -82,9 +82,9 @@ const BooksQ = () => {
       let response;
 
       if (state.reference && !state.keyword) {
-        response = await axios.get(`http://api.alquran.cloud/v1/ayah/${state.reference}/en-saheeh`);
+        response = await axios.get(`https://api.alquran.cloud/v1/ayah/${state.reference}/en-saheeh`);
       } else if (state.keyword) {
-        response = await axios.get(`http://api.alquran.cloud/v1/search/${state.keyword}/all/en`);
+        response = await axios.get(`https://api.alquran.cloud/v1/search/${state.keyword}/all/en`);
       }
 
       dispatch({
